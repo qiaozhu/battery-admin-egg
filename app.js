@@ -15,11 +15,11 @@ module.exports = app => {
     async set(key, value, maxAge) {
       maxAge = typeof maxAge === 'number' ? maxAge : ONE_DAY;
       value = JSON.stringify(value);
-      await app.redis.set(key, value, 'PX', maxAge);
+      await app.redis.set(key, value, maxAge);
     },
 
     async destroy(key) {
       await app.redis.del(key);
-    }
+    },
   };
 };
