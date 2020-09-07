@@ -1,6 +1,6 @@
 'use strict';
 
-const uuid = require('uuid/v1');
+const { v1: uuidv1 } = require('uuid');
 const JSEncrypt = require('node-jsencrypt');
 const md5 = require('md5');
 const moment = require('moment');
@@ -8,29 +8,29 @@ const humps = require('humps');
 const nodemailer = require('nodemailer');
 
 module.exports = {
-  _uuid: function() {
-    return uuid().replace(/-/g, '');
+  _uuid: function () {
+    return uuidv1().replace(/-/g, '');
   },
   // rsa加密
-  _encrypt: function(value) {
+  _encrypt: function (value) {
     const { app } = this;
     let encrypt = new JSEncrypt();
     encrypt.setPublicKey(app.config.rsaKey.publicKey);
     return encrypt.encrypt(value);
   },
   // rsa解密
-  _decrypt: function(value) {
+  _decrypt: function (value) {
     const { app } = this;
     let decrypt = new JSEncrypt();
     decrypt.setPrivateKey(app.config.rsaKey.privateKey);
     return decrypt.decrypt(value);
   },
   // md5加密
-  _md5: function(value) {
+  _md5: function (value) {
     return md5(value);
   },
   // 时间格式化
-  dateFormat: function(value) {
+  dateFormat: function (value) {
     const _date = new Date(value);
 
     var date = {
@@ -40,7 +40,7 @@ module.exports = {
       'm+': _date.getMinutes(),
       's+': _date.getSeconds(),
       'q+': Math.floor((_date.getMonth() + 3) / 3),
-      'S+': _date.getMilliseconds()
+      'S+': _date.getMilliseconds(),
     };
     if (/(y+)/i.test(value)) {
       value = value.replace(RegExp.$1, (_date.getFullYear() + '').substr(4 - RegExp.$1.length));
@@ -58,7 +58,7 @@ module.exports = {
   // 平行结构转树结构
   arrayToTree(arr) {
     //  删除所有 children,以防止多次调用
-    arr.forEach(function(item) {
+    arr.forEach(function (item) {
       delete item.children;
     });
     let map = {}; // 构建map
@@ -102,7 +102,7 @@ module.exports = {
       offset: parseInt(params.pageNo - 1) * parseInt(params.pageSize),
       limit: params.pageSize,
       attributes,
-      ...where
+      ...where,
     });
 
     // 返回分页查询结果
@@ -158,7 +158,7 @@ module.exports = {
           host: app.config.mail.host,
           secure: true,
           port: app.config.mail.port,
-          auth: app.config.mail.auth
+          auth: app.config.mail.auth,
         });
 
         let content1 = `您被邀请登录<b>${app.config.projectName}</b>`;
@@ -186,7 +186,7 @@ module.exports = {
           from: `${app.config.companyName} <${app.config.mail.from}>`,
           to: to,
           subject: type === 'login' ? subject1 : subject2,
-          html: type === 'login' ? content1 : content2
+          html: type === 'login' ? content1 : content2,
         });
         resolve();
       } catch (e) {
@@ -219,5 +219,5 @@ module.exports = {
     }
   },
   moment,
-  humps
+  humps,
 };
