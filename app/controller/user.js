@@ -8,12 +8,12 @@ class UserController extends Controller {
     const { ctx } = this;
     let params = { ...ctx.request.body };
     // rsa解密
-    params.password = ctx.helper._decrypt(params.password);
+    // params.password = ctx.helper._decrypt(params.password);
 
     // 定义校验规则
     let schema = {
       account: { type: 'string', required: true, allowEmpty: false, format: /^1[0-9]{10}$/ },
-      password: { type: 'string', min: 6, max: 20, required: true }
+      password: { type: 'string', min: 6, max: 20, required: true },
     };
     if (params.account === 'admin') {
       delete schema.account;
@@ -26,7 +26,7 @@ class UserController extends Controller {
       // 创建token并返回
       const token = await ctx.service.token.createToken({
         userId: resData.userId,
-        companyId: resData.companyId || ''
+        companyId: resData.companyId || '',
       });
       ctx.body = { status: 0, message: 'success', data: token };
     } else {
@@ -72,7 +72,7 @@ class UserController extends Controller {
     // 定义校验规则
     const schema = {
       pageNo: { type: 'number', min: 1, max: 999, required: true },
-      pageSize: { type: 'number', min: 1, max: 999, required: true }
+      pageSize: { type: 'number', min: 1, max: 999, required: true },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -91,7 +91,7 @@ class UserController extends Controller {
       account: { type: 'string', min: 11, max: 11, required: true },
       email: { type: 'email', max: 64, required: true },
       remark: { type: 'string', max: 255, required: false },
-      companyId: { type: 'string', min: 32, max: 32, required: false }
+      companyId: { type: 'string', min: 32, max: 32, required: false },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -126,7 +126,7 @@ class UserController extends Controller {
       account: { type: 'string', min: 11, max: 11, required: true },
       email: { type: 'email', max: 64, required: true },
       remark: { type: 'string', max: 255, required: false },
-      companyId: { type: 'string', min: 32, max: 32, required: false }
+      companyId: { type: 'string', min: 32, max: 32, required: false },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -153,7 +153,7 @@ class UserController extends Controller {
     // 定义校验规则
     const schema = {
       userId: { type: 'string', min: 32, max: 32, required: true },
-      state: { type: 'enum', values: [0, 1], required: true } // 0启用 1禁用
+      state: { type: 'enum', values: [0, 1], required: true }, // 0启用 1禁用
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -215,7 +215,7 @@ class UserController extends Controller {
     // 定义校验规则
     const schema = {
       account: { type: 'string', min: 11, max: 11, required: true },
-      email: { type: 'email', max: 64, required: true }
+      email: { type: 'email', max: 64, required: true },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -240,8 +240,8 @@ class UserController extends Controller {
     const params = { ...ctx.request.body };
 
     // rsa解密
-    params.newpwd = ctx.helper._decrypt(params.newpwd);
-    params.newpwd2 = ctx.helper._decrypt(params.newpwd2);
+    // params.newpwd = ctx.helper._decrypt(params.newpwd);
+    // params.newpwd2 = ctx.helper._decrypt(params.newpwd2);
 
     // 定义校验规则
     const schema = {
@@ -249,7 +249,7 @@ class UserController extends Controller {
       email: { type: 'email', max: 64, required: true },
       code: { type: 'string', min: 8, max: 8, required: true },
       newpwd: { type: 'string', min: 6, max: 20, required: true },
-      newpwd2: { type: 'string', min: 6, max: 20, required: true }
+      newpwd2: { type: 'string', min: 6, max: 20, required: true },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -281,15 +281,15 @@ class UserController extends Controller {
     const params = { ...ctx.request.body };
 
     // rsa解密
-    params.oldpwd = ctx.helper._decrypt(params.oldpwd);
-    params.newpwd = ctx.helper._decrypt(params.newpwd);
-    params.newpwd2 = ctx.helper._decrypt(params.newpwd2);
+    // params.oldpwd = ctx.helper._decrypt(params.oldpwd);
+    // params.newpwd = ctx.helper._decrypt(params.newpwd);
+    // params.newpwd2 = ctx.helper._decrypt(params.newpwd2);
 
     // 定义校验规则
     const schema = {
       oldpwd: { type: 'string', min: 6, max: 20, required: true },
       newpwd: { type: 'string', min: 6, max: 20, required: true },
-      newpwd2: { type: 'string', min: 6, max: 20, required: true }
+      newpwd2: { type: 'string', min: 6, max: 20, required: true },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
@@ -321,7 +321,7 @@ class UserController extends Controller {
       userName: { type: 'string', max: 20, required: true },
       remark: { type: 'string', max: 255, required: false },
       email: { type: 'email', max: 64, required: true },
-      avatar: { type: 'string', max: 64, required: false }
+      avatar: { type: 'string', max: 64, required: false },
     };
     // 校验参数
     if (!this.validate(schema, params)) return;
