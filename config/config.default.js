@@ -25,33 +25,33 @@ module.exports = appInfo => {
     //项目启动端口
     cluster: {
       listen: {
-        port: 7500
-      }
+        port: 7500,
+      },
     },
     siteFile: {
-      '/favicon.ico': fs.readFileSync(path.join(appInfo.baseDir, 'app/public/favicon.png'))
+      '/favicon.ico': fs.readFileSync(path.join(appInfo.baseDir, 'app/public/favicon.png')),
     },
     static: {
       // 静态化访问前缀,如：`http://127.0.0.1:7500/public/favicon.png`
       prefix: '/public',
-      dir: path.join(appInfo.baseDir, 'app/public')
+      dir: path.join(appInfo.baseDir, 'app/public'),
     },
     security: {
       csrf: {
-        enable: false
-      }
+        enable: false,
+      },
     },
     cors: {
       origin: '*',
       allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-      credentials: true
+      credentials: true,
     },
     jwt: {
-      secret: 'JqTv5Ba36W7IC8FU'
+      secret: 'JqTv5Ba36W7IC8FU',
     },
     multipart: {
       mode: 'stream',
-      whitelist: ['.jpg', '.jpeg', '.png'] // 覆盖整个白名单，只允许上传格式
+      whitelist: ['.jpg', '.jpeg', '.png'], // 覆盖整个白名单，只允许上传格式
     },
     sequelize: {
       dialect: 'mysql',
@@ -63,30 +63,30 @@ module.exports = appInfo => {
       timezone: '+08:00', //东八时区
       define: {
         freezeTableName: true,
-        underscored: true
+        underscored: true,
       },
       // 格式化时间
       dialectOptions: {
         dateStrings: true,
-        typeCast: true
-      }
+        typeCast: true,
+      },
     },
     validate: {
-      convert: true
+      convert: true,
       // validateRoot: false,
     },
     rsaKey: {
       publicKey: rsaKey.dev.publicKey,
-      privateKey: rsaKey.dev.privateKey
+      privateKey: rsaKey.dev.privateKey,
     },
     mail: {
       host: 'smtp.qq.com',
       port: 465,
       auth: {
         user: '378937873@qq.com',
-        pass: 'zlnqscamwwbdbigb'
+        pass: 'zlnqscamwwbdbigb',
       },
-      from: '378937873@qq.com'
+      from: '378937873@qq.com',
     },
     companyName: '东莞（深圳）弘凯新能源科技有限公司',
     projectName: '弘凯科技管理后台',
@@ -94,17 +94,17 @@ module.exports = appInfo => {
     imgPrefix: 'http://192.168.12.77:7500',
     redis: {
       client: {
-        host: '127.0.0.1',
+        host: 'localhost',
         port: '6379',
         password: '',
-        db: '0'
+        db: '0',
       },
-      agent: true
-    }
+      agent: true,
+    },
   };
 
   return {
     ...config,
-    ...userConfig
+    ...userConfig,
   };
 };
