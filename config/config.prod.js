@@ -11,7 +11,7 @@ module.exports = appInfo => {
       publicKey: rsaKey.prod.publicKey,
       privateKey: rsaKey.prod.privateKey,
     },
-    imgPrefix: 'https://www.qiaodev.com',
+    imgPrefix: 'https://www.qiaodev.com/assets/battery',
     sequelize: {
       dialect: 'mysql',
       host: 'localhost',
